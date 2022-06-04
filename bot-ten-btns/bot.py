@@ -1,25 +1,29 @@
 import os
+import sys
 import asyncio
 
 
 from aiogram import Bot, Dispatcher, types
 
 from dotenv import load_dotenv
-from welcome import register_welcome
-from one_btn import register_one_btn
-from bot_ten_btns import register_bot_tens
+from check_db import main as check_db
+from handlers import register_handlers
 
 
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
-async def main():        
+async def main():
+    try:
+        await check_db()
+    except Exception as e:
+        print(f"Ошибка в базах данных!\nОшибка: {e}")
+        sys.exit()
+        
+        
     load_dotenv("../.env")
-    bot = Bot(token=os.getenv("admin_bot_token"))
-    dp = Dispatcher(bot, storage=MemoryStorage())
-
-    register_welcome(dp)
-    register_one_btn(dp)
-    register_bot_tens(dp)
+    bot = Bot(token=os.getenv("ten_btns_token"))
+    dp = Dispatcher(bot)
+    
+    register_handlers(dp)
+    
     print("Bot running!")
     
     await dp.start_polling()
