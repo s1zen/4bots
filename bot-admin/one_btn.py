@@ -16,19 +16,21 @@ class one_btn_edit(StatesGroup):
 
 
 async def one_btn_change(message: Message):
-    change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
-        KeyboardButton("Название кнопки"),
-        KeyboardButton("Ссылка кнопки"),
-        KeyboardButton("Описание"),
-        KeyboardButton("Домой")
-    )
-    
-    await message.answer("Что изменить: ", reply_markup=change_btns)
+    if message.from_user.id == "697153465":
+        change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
+            KeyboardButton("Название кнопки"),
+            KeyboardButton("Ссылка кнопки"),
+            KeyboardButton("Описание"),
+            KeyboardButton("Домой")
+        )
+        
+        await message.answer("Что изменить: ", reply_markup=change_btns)
     
 
 async def change_name_btn(message: Message):
-    await message.answer("Введите новое имя кнопки")
-    await one_btn_edit.btn_name.set()
+    if message.from_user.id == "697153465":
+        await message.answer("Введите новое имя кнопки")
+        await one_btn_edit.btn_name.set()
     
 async def edit_name_btn(message: Message, state: FSMContext):
     connect_db = sqlite3.connect("../db/bots.db")
@@ -50,8 +52,9 @@ async def edit_name_btn(message: Message, state: FSMContext):
 
     
 async def change_name_link(message: Message):
-    await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
-    await one_btn_edit.btn_link.set()
+    if message.from_user.id == "697153465": 
+        await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
+        await one_btn_edit.btn_link.set()
 
 async def edit_name_link(message: Message, state: FSMContext):
     connect_db = sqlite3.connect("../db/bots.db")

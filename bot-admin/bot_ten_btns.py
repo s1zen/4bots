@@ -39,13 +39,14 @@ class bot_tens_edit(StatesGroup):
 
 
 async def bot_tens_change(message: Message):
-    change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
-        KeyboardButton("Кнопки"),
-        KeyboardButton("Общее описание"),
-        KeyboardButton("Домой")
-    )
-    
-    await message.answer("Что изменить: ", reply_markup=change_btns)
+    if message.from_user.id == "697153465":
+        change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
+            KeyboardButton("Кнопки"),
+            KeyboardButton("Общее описание"),
+            KeyboardButton("Домой")
+        )
+        
+        await message.answer("Что изменить: ", reply_markup=change_btns)
  
 async def btns_change(message: Message):
     btns = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True).add(
@@ -65,105 +66,108 @@ async def btns_change(message: Message):
     await message.answer("Выберите кнопку", reply_markup=btns)
 
 async def btn_change(message: Message, state: FSMContext):
-    edit = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2).add(
-        KeyboardButton("Имя кнопки"),
-        KeyboardButton("Ссылку кнопки"),
-        KeyboardButton("Домой")
-    )
-    await message.answer(f"Выбрана кнопка: {message.text}\nЧто изменить: ", reply_markup=edit)
-    await state.update_data(btn=message.text)
+    if message.from_user.id == "697153465":
+        edit = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2).add(
+            KeyboardButton("Имя кнопки"),
+            KeyboardButton("Ссылку кнопки"),
+            KeyboardButton("Домой")
+        )
+        await message.answer(f"Выбрана кнопка: {message.text}\nЧто изменить: ", reply_markup=edit)
+        await state.update_data(btn=message.text)
 
 async def name_btn_change(message: Message, state: FSMContext):
-    
-    data = await state.get_data()
-    try:
-        if data["btn"] == "1 кнопка":
-            await bot_tens_edit.btn_name_1.set()
-        elif data["btn"] == "2 кнопка":
-            await bot_tens_edit.btn_name_2.set()
-        elif data["btn"] == "3 кнопка":
-            await bot_tens_edit.btn_name_3.set()
-        elif data["btn"] == "4 кнопка":
-            await bot_tens_edit.btn_name_4.set()
-        elif data["btn"] == "5 кнопка":
-            await bot_tens_edit.btn_name_5.set()
-        elif data["btn"] == "6 кнопка":
-            await bot_tens_edit.btn_name_6.set()
-        elif data["btn"] == "7 кнопка":
-            await bot_tens_edit.btn_name_7.set()
-        elif data["btn"] == "8 кнопка":
-            await bot_tens_edit.btn_name_8.set()
-        elif data["btn"] == "9 кнопка":
-            await bot_tens_edit.btn_name_9.set()
-        elif data["btn"] == "10 кнопка":
-            await bot_tens_edit.btn_name_10.set()
-        else:
-            await message.answer("Что-то пошло не так.\nНажми кнопку: Домой")
-        await message.answer("Введите новое имя кнопки")
-    except Exception as e:
-        btns = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True).add(
-            KeyboardButton("1 кнопка"),
-            KeyboardButton("2 кнопка"),
-            KeyboardButton("3 кнопка"),
-            KeyboardButton("4 кнопка"),
-            KeyboardButton("5 кнопка"),
-            KeyboardButton("6 кнопка"),
-            KeyboardButton("7 кнопка"),
-            KeyboardButton("8 кнопка"),
-            KeyboardButton("9 кнопка"),
-            KeyboardButton("10 кнопка"),
-            KeyboardButton("Домой")
-        )
-        await message.answer("Выберите кнопку", reply_markup=btns)
+    if message.from_user.id == "697153465":
+        data = await state.get_data()
+        try:
+            if data["btn"] == "1 кнопка":
+                await bot_tens_edit.btn_name_1.set()
+            elif data["btn"] == "2 кнопка":
+                await bot_tens_edit.btn_name_2.set()
+            elif data["btn"] == "3 кнопка":
+                await bot_tens_edit.btn_name_3.set()
+            elif data["btn"] == "4 кнопка":
+                await bot_tens_edit.btn_name_4.set()
+            elif data["btn"] == "5 кнопка":
+                await bot_tens_edit.btn_name_5.set()
+            elif data["btn"] == "6 кнопка":
+                await bot_tens_edit.btn_name_6.set()
+            elif data["btn"] == "7 кнопка":
+                await bot_tens_edit.btn_name_7.set()
+            elif data["btn"] == "8 кнопка":
+                await bot_tens_edit.btn_name_8.set()
+            elif data["btn"] == "9 кнопка":
+                await bot_tens_edit.btn_name_9.set()
+            elif data["btn"] == "10 кнопка":
+                await bot_tens_edit.btn_name_10.set()
+            else:
+                await message.answer("Что-то пошло не так.\nНажми кнопку: Домой")
+            await message.answer("Введите новое имя кнопки")
+        except Exception as e:
+            btns = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True).add(
+                KeyboardButton("1 кнопка"),
+                KeyboardButton("2 кнопка"),
+                KeyboardButton("3 кнопка"),
+                KeyboardButton("4 кнопка"),
+                KeyboardButton("5 кнопка"),
+                KeyboardButton("6 кнопка"),
+                KeyboardButton("7 кнопка"),
+                KeyboardButton("8 кнопка"),
+                KeyboardButton("9 кнопка"),
+                KeyboardButton("10 кнопка"),
+                KeyboardButton("Домой")
+            )
+            await message.answer("Выберите кнопку", reply_markup=btns)
 
 async def link_btn_edit(message: Message, state: FSMContext):
-    data = await state.get_data()
-    try:
-        if data["btn"] == "1 кнопка":
-            await bot_tens_edit.btn_link_1.set()
-        elif data["btn"] == "2 кнопка":
-            await bot_tens_edit.btn_link_2.set()
-        elif data["btn"] == "3 кнопка":
-            await bot_tens_edit.btn_link_3.set()
-        elif data["btn"] == "4 кнопка":
-            await bot_tens_edit.btn_link_4.set()
-        elif data["btn"] == "5 кнопка":
-            await bot_tens_edit.btn_link_5.set()
-        elif data["btn"] == "6 кнопка":
-            await bot_tens_edit.btn_link_6.set()
-        elif data["btn"] == "7 кнопка":
-            await bot_tens_edit.btn_link_7.set()
-        elif data["btn"] == "8 кнопка":
-            await bot_tens_edit.btn_link_8.set()
-        elif data["btn"] == "9 кнопка":
-            await bot_tens_edit.btn_link_9.set()
-        elif data["btn"] == "10 кнопка":
-            await bot_tens_edit.btn_link_10.set()
-        else:
-            await message.answer("Что-то пошло не так.\nНажми кнопку: Домой")
-        await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
-    except Exception as e:
-        btns = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True).add(
-            KeyboardButton("1 кнопка"),
-            KeyboardButton("2 кнопка"),
-            KeyboardButton("3 кнопка"),
-            KeyboardButton("4 кнопка"),
-            KeyboardButton("5 кнопка"),
-            KeyboardButton("6 кнопка"),
-            KeyboardButton("7 кнопка"),
-            KeyboardButton("8 кнопка"),
-            KeyboardButton("9 кнопка"),
-            KeyboardButton("10 кнопка"),
-            KeyboardButton("Домой")
-        )
-        await message.answer("Выберите кнопку", reply_markup=btns)
+    if message.from_user.id == "697153465":
+    
+        data = await state.get_data()
+        try:
+            if data["btn"] == "1 кнопка":
+                await bot_tens_edit.btn_link_1.set()
+            elif data["btn"] == "2 кнопка":
+                await bot_tens_edit.btn_link_2.set()
+            elif data["btn"] == "3 кнопка":
+                await bot_tens_edit.btn_link_3.set()
+            elif data["btn"] == "4 кнопка":
+                await bot_tens_edit.btn_link_4.set()
+            elif data["btn"] == "5 кнопка":
+                await bot_tens_edit.btn_link_5.set()
+            elif data["btn"] == "6 кнопка":
+                await bot_tens_edit.btn_link_6.set()
+            elif data["btn"] == "7 кнопка":
+                await bot_tens_edit.btn_link_7.set()
+            elif data["btn"] == "8 кнопка":
+                await bot_tens_edit.btn_link_8.set()
+            elif data["btn"] == "9 кнопка":
+                await bot_tens_edit.btn_link_9.set()
+            elif data["btn"] == "10 кнопка":
+                await bot_tens_edit.btn_link_10.set()
+            else:
+                await message.answer("Что-то пошло не так.\nНажми кнопку: Домой")
+            await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
+        except Exception as e:
+            btns = ReplyKeyboardMarkup(row_width=5, resize_keyboard=True).add(
+                KeyboardButton("1 кнопка"),
+                KeyboardButton("2 кнопка"),
+                KeyboardButton("3 кнопка"),
+                KeyboardButton("4 кнопка"),
+                KeyboardButton("5 кнопка"),
+                KeyboardButton("6 кнопка"),
+                KeyboardButton("7 кнопка"),
+                KeyboardButton("8 кнопка"),
+                KeyboardButton("9 кнопка"),
+                KeyboardButton("10 кнопка"),
+                KeyboardButton("Домой")
+            )
+            await message.answer("Выберите кнопку", reply_markup=btns)  
 
 
 # Edit name btn =========================
 async def edit_1_btn(message: Message, state: FSMContext):
     connect_db = sqlite3.connect("../db/bots.db")
     cursor_db = connect_db.cursor()
-    
+
 
     try:    
         cursor_db.execute(f"UPDATE bot_ten_btns SET name_btn = '{message.text}' WHERE id = 1")
