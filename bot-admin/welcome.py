@@ -5,11 +5,12 @@ from aiogram.types import Message
 from aiogram.dispatcher.filters import Text
 
 async def welcome(message: Message):
-    if message.from_user.id == "697153465":
+    # if message.from_user.id == "697153465":
         
         bots = ReplyKeyboardMarkup(resize_keyboard=True).add(
             KeyboardButton("Бот с одной кнопкой"),
             KeyboardButton("Бот с 10 кнопками"),
+            KeyboardButton("Бот-поддержки")
         )
             
         await message.answer("Выберите бота: ", reply_markup=bots)

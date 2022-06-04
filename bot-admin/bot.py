@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from welcome import register_welcome
 from one_btn import register_one_btn
 from bot_ten_btns import register_bot_tens
+from bot_support import register_bot_support
 
 
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -20,6 +21,7 @@ async def main():
     register_welcome(dp)
     register_one_btn(dp)
     register_bot_tens(dp)
+    register_bot_support(dp)
     print("Bot running!")
     
     await dp.start_polling()

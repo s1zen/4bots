@@ -10,8 +10,6 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
-from aiogram.dispatcher.filters.state import State, StatesGroup
-
 class bot_tens_edit(StatesGroup):
     btn_name_1 = State()
     btn_name_2 = State()
