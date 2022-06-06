@@ -31,7 +31,7 @@ async def send_welcome(message: types.Message):
 async def send_problem(message: types.Message):
     if message.from_user.id == message.chat.id:
         await message.forward(-1001712842771)
-        await message.answer("Ваша проблема была успешно отправлена!")
+        await message.answer("Ваше обращение зарегистрировано.\nОжидайте ответа оператора.")
     elif message.chat.type == "supergroup":
         try:
             await bot.send_message(message["reply_to_message"]["forward_from"]["id"], f"Ответ от администратора: {message['text']}")
