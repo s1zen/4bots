@@ -37,7 +37,7 @@ class bot_tens_edit(StatesGroup):
 
 
 async def bot_tens_change(message: Message):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
             KeyboardButton("Кнопки"),
             KeyboardButton("Общее описание"),
@@ -64,7 +64,7 @@ async def btns_change(message: Message):
     await message.answer("Выберите кнопку", reply_markup=btns)
 
 async def btn_change(message: Message, state: FSMContext):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         edit = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2).add(
             KeyboardButton("Имя кнопки"),
             KeyboardButton("Ссылку кнопки"),
@@ -74,7 +74,7 @@ async def btn_change(message: Message, state: FSMContext):
         await state.update_data(btn=message.text)
 
 async def name_btn_change(message: Message, state: FSMContext):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         data = await state.get_data()
         try:
             if data["btn"] == "1 кнопка":
@@ -117,7 +117,7 @@ async def name_btn_change(message: Message, state: FSMContext):
             await message.answer("Выберите кнопку", reply_markup=btns)
 
 async def link_btn_edit(message: Message, state: FSMContext):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
     
         data = await state.get_data()
         try:

@@ -16,7 +16,7 @@ class bot_support_edit(StatesGroup):
     
     
 async def bot_support_change(message: Message):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
             KeyboardButton("Имя кнопки при старте"),
             KeyboardButton("Ссылку кнопки при старте"),
@@ -28,7 +28,7 @@ async def bot_support_change(message: Message):
     
 
 async def change_name_btn_support(message: Message):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         await message.answer("Введите новое имя кнопки")
         await bot_support_edit.btn_name_support.set()
     
@@ -52,7 +52,7 @@ async def edit_name_btn_support(message: Message, state: FSMContext):
 
     
 async def change_name_link_support(message: Message):
-    if message.from_user.id == "697153465": 
+    if message.from_user.id in [900793919, 697153465]: 
         await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
         await bot_support_edit.btn_link_support.set()
 
@@ -75,7 +75,7 @@ async def edit_name_link_support(message: Message, state: FSMContext):
 
 
 async def change_description_support(message: Message):
-    if message.from_user.id == "697153465": 
+    if message.from_user.id in [900793919, 697153465]:
         await message.answer("Введите новое описание")    
         await bot_support_edit.description_support.set()
     

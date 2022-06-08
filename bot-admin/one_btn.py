@@ -16,7 +16,7 @@ class one_btn_edit(StatesGroup):
 
 
 async def one_btn_change(message: Message):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         change_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1).add(
             KeyboardButton("Название кнопки"),
             KeyboardButton("Ссылка кнопки"),
@@ -28,7 +28,7 @@ async def one_btn_change(message: Message):
     
 
 async def change_name_btn(message: Message):
-    if message.from_user.id == "697153465":
+    if message.from_user.id in [900793919, 697153465]:
         await message.answer("Введите новое имя кнопки")
         await one_btn_edit.btn_name.set()
     
@@ -52,7 +52,7 @@ async def edit_name_btn(message: Message, state: FSMContext):
 
     
 async def change_name_link(message: Message):
-    if message.from_user.id == "697153465": 
+    if message.from_user.id in [900793919, 697153465]: 
         await message.answer("Введите новую ссылку кнопки (примечание: ссылка должна начинаться на https:// или http://)")
         await one_btn_edit.btn_link.set()
 
